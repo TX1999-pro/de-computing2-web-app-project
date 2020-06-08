@@ -1,8 +1,7 @@
 const quizUI = Object.create(null);
 
 quizUI.init = function (questions) {
-    const shuffledQuestions = questions.sort(() => Math.random() - 0.5);
-    let currentQuestionIndex = 0;
+
     const el = (id) => document.getElementById(id);
     const cloneTemplate = function (id) {
         return document.importNode(el(id).content, true);
@@ -13,6 +12,9 @@ quizUI.init = function (questions) {
     const questionContainerEl = el("question-container");
     const questionEl = el("question");
     const answerButtonsEl = el("answer-buttons");
+
+    let shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+    let currentQuestionIndex = 0;
 
     function startGame() {
         /* console.log("Game Started"); */
@@ -79,6 +81,8 @@ quizUI.init = function (questions) {
         } else {
             startButton.innerText = "Try again!";
             startButton.classList.remove("hide");
+            shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+            currentQuestionIndex = 0;
         }
     }
 };
