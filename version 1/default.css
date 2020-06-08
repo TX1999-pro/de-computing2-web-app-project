@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --hue-neutral: 200;
+    --hue-wrong: 0;
+    --hue-correct: 150;
+
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(var(--hue), 80%, 30%);
+}
+
+body.neutral {
+    --hue: var(--hue-neutral);
+}
+body.correct {
+    --hue: var(--hue-correct);
+}
+
+body.wrong {
+    --hue: var(--hue-wrong);
+}
+
+.container {
+    width: 800px;
+    max-width:80%;
+    background-color: white;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: 0 0 10px;
+}
+
+.btn-grid {
+    display: grid;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.btn {
+    cursor: pointer;
+    --hue: var(--hue-neutral);
+    border: 2px solid hsl(var(--hue),100%,30%);
+    background-color: hsl(var(--hue), 100%, 50%);
+    border-radius: 6px;
+    padding: 5px;
+    color: white;
+    outline: none;
+}
+
+.btn:hover {
+    border-color: black;
+    color: black;
+}
+
+.btn.correct {
+    --hue: var(--hue-correct);
+    color: black;
+}
+
+.btn.wrong {
+    --hue: var(--hue-wrong);
+}
+
+.start-btn, .next-btn {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.controls {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.hide {
+    display: none;
+}
