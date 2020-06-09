@@ -63,6 +63,7 @@ let score=0;
 let questionIndex = 0;
 let attempt = 0;
 let interval = [];
+let mostRecentScore = 0;
 
 const show = (el) => el.classList.add("show");
 const hide = (el) => el.classList.add("hide");
@@ -71,13 +72,23 @@ const unhide = (el) => el.classList.remove("hide");
 
 
 window.addEventListener("DOMContentLoaded", function(){
+    quizInit();
+    hide(quizBox);
+});
+
+startQuizBtn.addEventListener("click",() => {
     hide(quizHomeBox);
+    unshow(seeResultBtn);
+    unhide(quizBox);
+    show(quizBox);
     loadQuestion();
 });
+
+
 nextQuestionBtn.addEventListener("click", nextQuestion);
 
 seeResultBtn.addEventListener("click",() => {
-    quizBox.style.display = "none";
+    hide(quizBox)
     show(quizOverBox);
     quizResults();
 });
@@ -89,13 +100,6 @@ goToHomeBtn.addEventListener("click",() => {
     quizInit();
 });
 
-startQuizBtn.addEventListener("click",() => {
-    hide(quizHomeBox);
-    unshow(seeResultBtn);
-    unhide(quizBox);
-    timerStart();
-    loadQuestion();
-});
 
 startAgainBtn.addEventListener("click",() => {
     quizBox.style.display = "block";
@@ -260,5 +264,19 @@ function quizInit() {
 function quizOver() {
     unshow(nextQuestionBtn);
     show(seeResultBtn);
+    mostRecentScore = score;
     /* console.log("quiz over!") */
+}
+
+/* username and score info */
+
+const username = document.getElementById('username');
+const saveScoreBtn = document.getElementById('saveScoreBtn');
+username.addEventListener("keyup", () => {
+    saveScoreBtn.disabled = !username.value;
+});
+
+saveHighScore = (e) => {
+    e.preventDefault();
+    console.log("clicked the save button!");
 }

@@ -56,6 +56,25 @@ content="width=device-width, inital-scale=1">
         <button type="button" class="start-again-quiz-btn btn">Start Again</button>
         <button type="button" class="go-home-btn btn">Go To Home</button>
     </div>
+    <div id="end">
+        <form>
+            <input
+                type="text"
+                name ="username"
+                id="username"
+                placeholder="username"
+            >
+            <button 
+                type="submit" 
+                class="btn" 
+                id="saveScoreBtn"
+                onclick="saveHighScore(event)"
+                disabled
+            >
+                Save
+            </button>
+        </form>
+    </div>
     
     
 <script src="./script.js"></script>

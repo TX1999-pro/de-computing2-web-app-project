@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
 @keyframes pulse {
     0%{
         transform:scale(1);
@@ -35,7 +33,7 @@
 
 *, *::before, *::after {
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
 body{
@@ -70,12 +68,20 @@ body{
     padding: 12px 30px;
     color: #ff8b00;
     border-radius: 25px;
-    font-family: 'Roboto', sans-serif;
-    font-size: medium;
-    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
     cursor: pointer;
     white-space: nowrap;
     margin:0 10px;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    color: white;
+    background-color: orange;
+    
+    transition-duration: 0.2s;
 }
 
 .quiz-box {
@@ -93,8 +99,8 @@ body{
 }
 
 .quiz-box .stats .quiz-time {
-    flex-basis: calc(50% -20px);
-    max-width: cal(50%-20px);
+    flex-basis: auto;
+    max-width: 40%;
     text-align: left;
 }
 
@@ -112,12 +118,13 @@ body{
 
 .quiz-box .stats .time-up-text {
     color: #c9240f;
-    font-weight: 600;
+    font-weight: bold;
     display: none;
 }
 
 .quiz-box .stats .time-up-text.show {
-    display: inline-block;
+    display: inline;
+    text-align: left;
     animation: fadeInOut 1s linear infinite;
 }
 
@@ -130,7 +137,7 @@ body{
 }
 
 .quiz-box .stats .score-board {
-    flex-basis: calc(50% -20px);
+    flex-basis: auto;
     max-width: cal(50%-20px);
     text-align: right;
     font-size: 28px;
@@ -188,7 +195,7 @@ body{
     text-align: center;
     font-size: 20px;
     text-transform: uppercase;
-    font-weight: 600px;
+    font-weight: normal;
     border-radius: 30px;
     border:2px solid #c2af91;
     cursor: pointer;
@@ -305,7 +312,7 @@ body{
     margin-top: 20px;
     padding: 20px;
     color: #555555;
-    font-size: small;
+    font-size: medium;
     font-weight: 300;
 }
 
@@ -339,12 +346,6 @@ body{
 .see-results-btn.show{
     display: inline-block;
     animation:fadeInRight 0.7s linear forwards;
-}
-.see-results-btn.show:hover {
-    background-color: orange;
-    box-shadow: 0 1px 0 #351503;
-    transform: translateY(1px);
-    transition-duration: 0.2s;
 }
 
 .quiz-over-box {
@@ -380,4 +381,25 @@ body{
 
 .go-home-btn .start-again-quiz-btn{
     margin-top:15px
+}
+
+
+/* FORMS */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+input {
+    margin-bottom: 1rem;
+    width: 20rem;
+    padding: 1.5rem;
+    border: none;
+    box-shadow: 0 0.1rem 1.5rem 0 rgba(85,185,235,0.5);
+}
+
+input::placeholder {
+    color: rgb(39, 39, 39);
 }
