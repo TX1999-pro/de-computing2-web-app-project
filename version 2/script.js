@@ -2,7 +2,8 @@ const questionBank = [
     {
         question: "The Plaka is the oldest quarter of which city?",
         options:["Athens", "Prague", "Rome", "Vienna"],
-        answer: 1
+        answer: 1,
+        description: "Fun fact: Athens once had a wonderful civilisation."
     },
     {
         question: "What is an axolotl?",
@@ -11,7 +12,8 @@ const questionBank = [
         answer: 4
     },
     {
-        question: "The Panama Canal was officially opened by which US president?",
+        question: "The Panama Canal was officially "+
+        "opened by which US president?",
         options:["Calvin Coolidge", "Herbert Hoover",
         "Theodore Roosevelt", "Woodrow Wilson"],
         answer: 4
@@ -22,63 +24,75 @@ const questionBank = [
         answer: 1
     },
     {
-        question: "After Adam, Eve, Cain and Abel who is the next person mentioned in the Bible?",
+        question: "After Adam, Eve, Cain and Abel who is the next person " +
+        "mentioned in the Bible?",
         options:["Enoch", "Jubal", "Lamech", "Zillah"],
         answer: 1
     }
 
 ];
-
-const questionText = document.querySelector(".question-text");
-const optionBox = document.querySelector(".option-box");
+const DQS = (el) => document.querySelector(el);
+const questionText = DQS(".question-text");
+const optionBox = DQS(".option-box");
+const answerDescription = DQS(".answer-description");
+const nextQuestionBtn = DQS(".next-question-btn");
 const questionIndex = 0;
-let thisQuestion = questionBank[questionIndex]
-/* function createOptions() {
-    for(let i = 0, i < thisQuestion.options.length; i++ ){
-        const option = document.createElement("div");
-        option.innerHTML = item;
-        option.classList.add("option");
-        option.id = i;
-        option.setAttribute("onclick", "check(this)");
-        optionBox.appendChild(option);
-    }
-} */
+const currentQuestionNum = DQS(".current-question-num");
 
 function createOptions() {
     questionBank[questionIndex].options.forEach(function(item, i){
         const option = document.createElement("div");
         option.innerHTML = item;
         option.classList.add("option");
-        option.id = i;
-        option.setAttribute("onclick", "check(this)");
+        option.id = i+1;
+        option.setAttribute("onclick", "checkAnswer(this)");
         optionBox.appendChild(option);
     });
 }
 
-function check(element) {
+function checkAnswer(element) {
     const id= element.id;
-    if (id === questionBank[questionIndex].answer) {
+    /* console.log("the answer is " + questionBank[questionIndex].answer); */
+    if (id == questionBank[questionIndex].answer) {
         element.classList.add("correct");
     }
     else {
         element.classList.add("wrong");
     }
-}
-function load() {
-    questionText.innerHTML = questionBank[questionIndex].question;
-    console.log(questionBank[questionIndex].question);
-    createOptions();
+    disableSelection();
+    showAnswerDescription();
+    showNextQuestionBtn();
 }
 
-/* window.onload = () => {
-    questionText.innerHTML = questionBank[questionIndex].question;
-    console.log(questionBank[questionIndex].question);
-    createOptions();
-} */
+function disableSelection() {
+    for(const child of optionBox.children) {
+        child.classList.add("already-answered")
+    }
+
+    /* Note:
+    How to use forEach to implement the iteration>
+    e.g. optionBox.children.forEach(function(child){
+        child.classList.add("already-answered");
+    })
+    Error Message appeared: forEach is not a function */
+}
+
+function showAnswerDescription() {
+    const description = questionBank[questionIndex].description
+    if (typeof description !== "undefined") {
+        answerDescription.classList.add("show");
+        answerDescription.innerHTML = description;
+    }
+}
+
+function showNextQuestionBtn() {
+    nextQuestionBtn.classList.add("show");
+}
 
 window.addEventListener("DOMContentLoaded", function(){
      questionText.innerHTML = questionBank[questionIndex].question;
-    console.log(questionBank[questionIndex].question);
+    /* console.log(questionBank[questionIndex].question); */
     createOptions();
+    currentQuestionNum.innerHTML = questionIndex + " / " + questionBank.length;
 });
 
