@@ -1,4 +1,4 @@
-import quizUI from "./quizUI.js";
+import script from "./script.js";
 
 window.addEventListener("DOMContentLoaded", function () {
     quizUI.init();

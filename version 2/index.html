@@ -3,14 +3,11 @@
 <meta charset="utf-8" name="viewpoint"
 content="width=device-width, inital-scale=1">
 <title>Quizzzzz 2.0 </title>
-<script type="module" src="main.js"></script>
+<!-- <script type="module" src="main.js"></script> -->
+
 <link rel="stylesheet" href="default.css">
 
-<head>
-    <h1>This is a Simple Quiz App</h1>
-</head>
-
-<body class="neutral">
+<body>
     <div class="quiz-home-box custom-box">
         <h4> You'll have 15 seconds to answer each question. </h4>
         <button type="button" class="start-quiz-btn btn">Start Quiz Now</button>
@@ -29,13 +26,12 @@ content="width=device-width, inital-scale=1">
             <div class="current-question-num">
                 1/9
             </div>
-            <div class="question-text">
+            <div id= "question-text"class="question-text">
                 This is an example question
             </div>
         </div>
-        <div class="option=box">
-            <div class="option">Example Answer 1</div>
-            <div class="option">Example Answer 2</div>
+        <div id="option-box" class="option-box">
+            
             <template id="options">
                 <div class="option">Example Answer</div>
             </template>
@@ -45,9 +41,23 @@ content="width=device-width, inital-scale=1">
         </div>
         <div class="next-question">
             <button type="button" class="next-question-btn btn">Next Question</button>
-            <button type="button" class="see-results-btn btn">See Your Result</button>
+            <button type="button" class="see-results-btn btn hide">See Your Result</button>
         </div>
     </div>
+
+    <div class="quiz-over-box custom-box">
+        <h1>Quiz Result</h1>
+        <h4> Total Questions: <span class="total-questions">9</span></h4>
+        <h4> Attempt: <span class="total-attempts">9</span></h4>
+        <h4> Correct: <span class="total-correct">6</span></h4>
+        <h4> Wrong: <span class="total-wrong">3</span></h4>
+        <h4> Percentage: <span class="percentage">66.6%</span></h4>
+        <button type="button" class="start-again-quiz-btn btn">Start Again</button>
+        <button type="button" class="go-home-btn btn">Go To Home</button>
+    </div>
     
+    
+<script src="./script.js"></script>
 </body>
+
 

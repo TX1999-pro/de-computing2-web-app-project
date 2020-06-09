@@ -1,6 +1,6 @@
 const quizUI = Object.create(null);
 
-quizUI.init = function (questions) {
+quizUI.init = function () {
 
     const el = (id) => document.getElementById(id);
     const cloneTemplate = function (id) {
