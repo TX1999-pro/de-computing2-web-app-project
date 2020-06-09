@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "fx-dev debug",
+      "type": "firefox",
+      "request": "launch",
+      "reAttach": true,
+      "reloadOnAttach": true,
+      "file": "${workspaceFolder}/index.html",
+      "preferences": {
+        "security.fileuri.strict_origin_policy": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-gb">
+<meta charset="utf-8" name="viewpoint"
+content="width=device-width, inital-scale=1">
+<title>Quizzzzz 2.0 </title>
+<script type="module" src="main.js"></script>
+<link rel="stylesheet" href="default.css">
+
+<head>
+    <h1>This is a Simple Quiz App</h1>
+</head>
+
+<body class="neutral">
+    <div class="quiz-home-box custom-box">
+        <h4> You'll have 15 seconds to answer each question. </h4>
+        <button type="button" class="start-quiz-btn btn">Start Quiz Now</button>
+    </div>
+    <div class="quiz-box custom-box">
+        <div class="stats">
+            <div class="quiz-time">
+                <div class="remaining-time">15</div>
+            </div>
+            <div class="score-board">
+                <span class="score-text">Score:</span>
+                <span class="correct-answers">0</span>
+            </div>
+        </div>
+        <div class="question-box">
+            <div class="current-question-num">
+                1/9
+            </div>
+            <div class="question-text">
+                This is an example question
+            </div>
+        </div>
+        <div class="option=box">
+            <div class="option">Example Answer 1</div>
+            <div class="option">Example Answer 2</div>
+            <template id="options">
+                <div class="option">Example Answer</div>
+            </template>
+        </div>
+        <div class="answer-description">
+            So what? I can't help you either.
+        </div>
+        <div class="next-question">
+            <button type="button" class="next-question-btn btn">Next Question</button>
+            <button type="button" class="see-results-btn btn">See Your Result</button>
+        </div>
+    </div>
+    
+</body>
+
