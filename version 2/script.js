@@ -31,15 +31,19 @@ const questionBank = [
     }
 
 ];
+
 const DQS = (el) => document.querySelector(el);
 const questionText = DQS(".question-text");
 const optionBox = DQS(".option-box");
 const answerDescription = DQS(".answer-description");
 const nextQuestionBtn = DQS(".next-question-btn");
-const questionIndex = 0;
+let questionIndex = 0;
 const currentQuestionNum = DQS(".current-question-num");
+const correctAnswer = DQS(".correct-answers");
+let score=0;
 
 function createOptions() {
+    clearOptionBox();
     questionBank[questionIndex].options.forEach(function(item, i){
         const option = document.createElement("div");
         option.innerHTML = item;
@@ -50,11 +54,17 @@ function createOptions() {
     });
 }
 
+function clearOptionBox() {
+    optionBox.innerHTML = "";
+}
+
 function checkAnswer(element) {
     const id= element.id;
     /* console.log("the answer is " + questionBank[questionIndex].answer); */
     if (id == questionBank[questionIndex].answer) {
         element.classList.add("correct");
+        score++;
+        scoreBoard();
     }
     else {
         element.classList.add("wrong");
@@ -89,10 +99,27 @@ function showNextQuestionBtn() {
     nextQuestionBtn.classList.add("show");
 }
 
-window.addEventListener("DOMContentLoaded", function(){
-     questionText.innerHTML = questionBank[questionIndex].question;
+function scoreBoard() {
+    correctAnswer.innerHTML = score;
+}
+
+nextQuestionBtn.addEventListener("click", nextQuestion);
+
+function nextQuestion() {
+    questionIndex++
+    if (questionIndex+1 < questionBank.length) {
+        loadQuestion();
+    }
+    else {
+        console.log("this is the end of the quiz");
+    }
+}
+function loadQuestion() {
+    questionText.innerHTML = questionBank[questionIndex].question;
     /* console.log(questionBank[questionIndex].question); */
     createOptions();
-    currentQuestionNum.innerHTML = questionIndex + " / " + questionBank.length;
-});
+    scoreBoard();
+    currentQuestionNum.innerHTML = (questionIndex+1) + " / " + questionBank.length;
+}
+window.addEventListener("DOMContentLoaded", loadQuestion());
 
