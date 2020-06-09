@@ -1,5 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+@keyframes pulse {
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.1);
+    }
+    100%{
+
+    }
+}
+@keyframes zoomIn {
+    0%{
+        opacity:0;
+        transform: scale(0.85);
+    }
+    100%{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+@keyframes fadeInOut{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
@@ -77,6 +110,25 @@ body{
     border-radius: 50px;
 }
 
+.quiz-box .stats .time-up-text {
+    color: #c9240f;
+    font-weight: 600;
+    display: none;
+}
+
+.quiz-box .stats .time-up-text.show {
+    display: inline-block;
+    animation: fadeInOut 1s linear infinite;
+}
+
+.quiz-box .stats .quiz-time .remaining-time.less-time{
+    color: whitesmoke;
+    background-color: red;
+    border-style: double;
+    animation: pulse 0.5s ease-in-out;
+    transition: all 1s;
+}
+
 .quiz-box .stats .score-board {
     flex-basis: calc(50% -20px);
     max-width: cal(50%-20px);
@@ -143,22 +195,17 @@ body{
     margin-top: 30px;
     padding: 15px 15px;
     position: relative;
+    animation: zoomIn 0.2s ease-in-out;
+    transition: all .1s linear;
     
 }
-@keyframes zoomIn {
-    0%{
-        transform: scale(0.85);
-    }
-    100%{
-        transform: scale(1);
-        opacity: 1;
-    }
-}
+
 
 .quiz-box .option-box .option:hover {
-    opacity: 0.9;
     background-color: orange;
-    animation: shake 2s linear;
+    box-shadow: 0 1px 0 #351503;
+    transform: translateY(1px);
+    transition-duration: 0.2s;
 }
 
 .quiz-box .option-box .option.already-answered {
@@ -169,19 +216,7 @@ body{
     background-color: #11C466;
     border-color: #059e4C;
     color: white;
-    animation: pulse 0.8s linear ;
-}
-
-@keyframes pulse {
-    0%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.1);
-    }
-    100%{
-
-    }
+    animation: pulse 0.5s linear ;
 }
 
 .quiz-box .option-box .option.correct::before{
@@ -197,14 +232,21 @@ body{
     background-size: 32px;
     background-position: center;
     background-repeat: no-repeat; 
-    animation: fadeInRight 0.5s ease-in-out;
+    animation: pulse 0.5s ease-in-out;
+}
+
+.quiz-box .option-box .option.show-correct {
+    background-color: #11C466;
+    border-color: #059e4C;
+    color: white;
+    animation: pulse 0.5s linear ;
 }
 
 .quiz-box .option-box .option.wrong {
     background-color: #f85943;
     border-color: #d23723;
     color: white;
-    animation: shake 1s linear;
+    animation: shake 0.7s linear;
 }
 
 .quiz-box .option-box .option.wrong::before{
@@ -220,7 +262,7 @@ body{
     background-size: 15px;
     background-position: center;
     background-repeat: no-repeat; 
-    animation: fadeInRight 0.5s ease-in-out;
+    animation: pulse 0.5s linear forwards;
 }
 
 @keyframes shake {
@@ -241,9 +283,15 @@ body{
     }
 }
 
-@keyframes FadeInRight {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+@keyframes fadeInRight {
+    0% { 
+        opacity: 0; 
+        transform:translateX(40px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }
 
 .quiz-box .answer-description {
@@ -257,29 +305,38 @@ body{
     font-weight: 300;
 }
 
-.answer-description.show {
-    display: inherit;
-    animation:fadeInright 1s ease-in-out;
-}
-
 .quiz-box .next-question {
     margin-top: 20px;
     text-align: center;
 }
 
-.see-result-btn,.next-question-btn, .answer-description {
+.quiz-box .next-question .next-question-btn.show:hover {
+    opacity: 0.9;
+    color: white;
+    background-color: orange;
+    
+    transition-duration: 0.2s;
+}
+
+.see-results-btn,.next-question-btn, .answer-description {
     display: none;
 }
 
-/* .see-result-btn.show{
-    display: inline-block;
-    animation:fadeInright 1s ease-in-out;
-} */
+.answer-description.show {
+    display: inherit;
+    animation:fadeInRight .7s linear forwards;
+}
 
 .next-question-btn.show{
     display: inline-block;
-    animation:fadeInright 1s ease-in-out;
+    animation:fadeInRight .7s linear forwards;
 }
+
+.see-results-btn.show{
+    display: inline-block;
+    animation:fadeInRight 0.7s linear forwards;
+}
+
 
 .hide {
     display: none;
