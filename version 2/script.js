@@ -56,9 +56,12 @@ const quizHomeBox = DQS(".quiz-home-box");
 const quizBox = DQS(".quiz-box");
 const quizOverBox = DQS(".quiz-over-box");
 const goToHomeBtn = DQS(".go-home-btn");
+const startAgainBtn = DQS(".start-again-quiz-btn");
+
 
 let score=0;
 let questionIndex = 0;
+let attempt = 0;
 let interval = [];
 
 const show = (el) => el.classList.add("show");
@@ -72,21 +75,34 @@ window.addEventListener("DOMContentLoaded", function(){
     loadQuestion();
 });
 nextQuestionBtn.addEventListener("click", nextQuestion);
+
 seeResultBtn.addEventListener("click",() => {
-    unshow(quizBox);
-    hide(quizBox)
+    quizBox.style.display = "none";
     show(quizOverBox);
+    quizResults();
 });
+
 goToHomeBtn.addEventListener("click",() => {
     unshow(quizOverBox);
     hide(quizOverBox);
     unhide(quizHomeBox);
+    quizInit();
 });
 
 startQuizBtn.addEventListener("click",() => {
     hide(quizHomeBox);
+    unshow(seeResultBtn);
     unhide(quizBox);
+    timerStart();
     loadQuestion();
+});
+
+startAgainBtn.addEventListener("click",() => {
+    quizBox.style.display = "block";
+    unshow(quizOverBox);
+    unshow(seeResultBtn);
+    quizInit();
+    nextQuestion();
 });
 
 function loadQuestion() {
@@ -133,6 +149,7 @@ function checkAnswer(element) {
     disableSelection();
     showAnswerDescription();
     questionIndex++;
+    attempt++;
     if (questionIndex < questionBank.length) {
         showNextQuestionBtn();
     }
@@ -142,15 +159,10 @@ function checkAnswer(element) {
 }
 
 function nextQuestion() {
-    if (questionIndex < questionBank.length) {
         loadQuestion();
         unshow(answerDescription);
         unshow(nextQuestionBtn);
         unshow(timeUpText);
-    }
-    else {
-        quizOver();
-    }
 }
 
 function disableSelection() {
@@ -226,6 +238,23 @@ function showCorrectAnswer(){
             optionBox.children[i].classList.add("show-correct");
         }
     }
+}
+
+function quizResults(){
+    DQS(".total-questions").innerHTML = questionBank.length;
+    DQS(".total-attempts").innerHTML = attempt;
+    DQS(".total-correct").innerHTML = score;
+    DQS(".total-wrong").innerHTML = attempt - score;
+    const percentage = (score/questionBank.length)*100;
+    DQS(".percentage").innerHTML = percentage.toFixed(2) +"%";
+
+}
+
+function quizInit() {
+    score=0;
+    questionIndex = 0;
+    attempt = 0;
+    interval = [];
 }
 
 function quizOver() {

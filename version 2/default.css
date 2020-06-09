@@ -340,6 +340,12 @@ body{
     display: inline-block;
     animation:fadeInRight 0.7s linear forwards;
 }
+.see-results-btn.show:hover {
+    background-color: orange;
+    box-shadow: 0 1px 0 #351503;
+    transform: translateY(1px);
+    transition-duration: 0.2s;
+}
 
 .quiz-over-box {
     text-align: center;
@@ -372,10 +378,6 @@ body{
     color: #111111;
 }
 
-.start-again-quiz-btn {
-    display: none;
-}
-
-.go-home-btn {
+.go-home-btn .start-again-quiz-btn{
     margin-top:15px
 }
