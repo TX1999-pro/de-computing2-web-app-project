@@ -51,17 +51,25 @@ const currentQuestionNum = DQS(".current-question-num");
 const correctAnswer = DQS(".correct-answers");
 const remainingTime = DQS(".remaining-time");
 const timeUpText = DQS(".time-up-text");
+const quizHomeBox = DQS(".quiz-home-box");
+const quizBox = DQS(".quiz-box");
+const quizOverBox = DQS(".quiz-over-box");
 
 let score=0;
 let questionIndex = 0;
 let interval = [];
 
-const hide = (el) => el.classList.remove("show");
+const unshow = (el) => el.classList.remove("show");
 const show = (el) => el.classList.add("show");
 
 
 window.addEventListener("DOMContentLoaded", loadQuestion());
 nextQuestionBtn.addEventListener("click", nextQuestion);
+seeResultBtn.addEventListener("click",() => {
+    unshow(quizBox);
+    show(quizOverBox);
+});
+
 
 function loadQuestion() {
     questionText.innerHTML = questionBank[questionIndex].question;
@@ -118,9 +126,9 @@ function checkAnswer(element) {
 function nextQuestion() {
     if (questionIndex < questionBank.length) {
         loadQuestion();
-        hide(answerDescription);
-        hide(nextQuestionBtn);
-        hide(timeUpText);
+        unshow(answerDescription);
+        unshow(nextQuestionBtn);
+        unshow(timeUpText);
     }
     else {
         quizOver();
@@ -154,14 +162,6 @@ function showNextQuestionBtn() {
 
 function scoreBoard() {
     correctAnswer.innerHTML = score;
-}
-
-
-function quizOver() {
-    hide(nextQuestionBtn);
-    show(seeResultBtn);
-    /* console.log("quiz over!") */
-
 }
 
 /* REMEBER: use callback to achieve timer function */
@@ -208,4 +208,10 @@ function showCorrectAnswer(){
             optionBox.children[i].classList.add("show-correct");
         }
     }
+}
+
+function quizOver() {
+    unshow(nextQuestionBtn);
+    show(seeResultBtn);
+    /* console.log("quiz over!") */
 }
