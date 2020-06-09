@@ -42,6 +42,7 @@ const questionBank = [
 ];
 
 const DQS = (el) => document.querySelector(el);
+const startQuizBtn = DQS(".start-quiz-btn");
 const questionText = DQS(".question-text");
 const optionBox = DQS(".option-box");
 const answerDescription = DQS(".answer-description");
@@ -54,22 +55,39 @@ const timeUpText = DQS(".time-up-text");
 const quizHomeBox = DQS(".quiz-home-box");
 const quizBox = DQS(".quiz-box");
 const quizOverBox = DQS(".quiz-over-box");
+const goToHomeBtn = DQS(".go-home-btn");
 
 let score=0;
 let questionIndex = 0;
 let interval = [];
 
-const unshow = (el) => el.classList.remove("show");
 const show = (el) => el.classList.add("show");
+const hide = (el) => el.classList.add("hide");
+const unshow = (el) => el.classList.remove("show");
+const unhide = (el) => el.classList.remove("hide");
 
 
-window.addEventListener("DOMContentLoaded", loadQuestion());
+window.addEventListener("DOMContentLoaded", function(){
+    hide(quizHomeBox);
+    loadQuestion();
+});
 nextQuestionBtn.addEventListener("click", nextQuestion);
 seeResultBtn.addEventListener("click",() => {
     unshow(quizBox);
+    hide(quizBox)
     show(quizOverBox);
 });
+goToHomeBtn.addEventListener("click",() => {
+    unshow(quizOverBox);
+    hide(quizOverBox);
+    unhide(quizHomeBox);
+});
 
+startQuizBtn.addEventListener("click",() => {
+    hide(quizHomeBox);
+    unhide(quizBox);
+    loadQuestion();
+});
 
 function loadQuestion() {
     questionText.innerHTML = questionBank[questionIndex].question;
