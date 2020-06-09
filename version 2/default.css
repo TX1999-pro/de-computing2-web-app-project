@@ -294,6 +294,10 @@ body{
     }
 }
 
+.hide {
+    display: none;
+}
+
 .quiz-box .answer-description {
     background-color: white;
     border:2px solid #c2af91;
@@ -337,14 +341,15 @@ body{
     animation:fadeInRight 0.7s linear forwards;
 }
 
-
-.hide {
-    display: none;
-}
-
 .quiz-over-box {
     text-align: center;
 }
+
+.quiz-over-box.show {
+    display: block;
+    animation: fadeInRight 1s ease-in;
+}
+
 .quiz-over-box h1{
     font-size: 40px;
     text-align: center;
