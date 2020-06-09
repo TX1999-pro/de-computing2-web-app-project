@@ -264,19 +264,40 @@ function quizInit() {
 function quizOver() {
     unshow(nextQuestionBtn);
     show(seeResultBtn);
-    mostRecentScore = score;
+    /* mostRecentScore = score; */
     /* console.log("quiz over!") */
+    localStorage.setItem("MostRecentScore", score);
 }
 
 /* username and score info */
 
-const username = document.getElementById('username');
-const saveScoreBtn = document.getElementById('saveScoreBtn');
+const username = document.getElementById("username");
+const saveScoreBtn = document.getElementById("saveScoreBtn");
 username.addEventListener("keyup", () => {
     saveScoreBtn.disabled = !username.value;
 });
 
+
+
+mostRecentScore = localStorage.getItem("mostRecentScore");
+const maxHighestScoreNum = 5;
+
 saveHighScore = (e) => {
     e.preventDefault();
     console.log("clicked the save button!");
+
+    const score = {
+        score: mostRecentScore,
+        name: username.value
+    };
+    highScores.push(score);
+    /* sort the highscore list */
+    /* Method adapted from James Q Quick on Youtube. Thanks James! */
+    highScores.sort((a,b) => b.score - a.score)
+    highScores.splice(5);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
 }
+
+
+const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
