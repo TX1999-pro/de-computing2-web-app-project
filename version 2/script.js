@@ -1,46 +1,3 @@
-const questionBank = [
-    {
-        question: "The Plaka is the oldest quarter of which city?",
-        options:["Athens", "Prague", "Rome", "Vienna"],
-        answer: 1,
-        description: "Fun fact: Athens once had a wonderful civilisation."
-    },
-    {
-        question: "What is an axolotl?",
-        options:["A nerve in the brain", "A multi-axled vehicle",
-        "A type of mortice lock", "A species of salamander"],
-        answer: 4,
-        description: "So what is salamander then :P"
-    },
-    {
-        question: "The Panama Canal was officially "+
-        "opened by which US president?",
-        options:["Calvin Coolidge", "Herbert Hoover",
-        "Theodore Roosevelt", "Woodrow Wilson"],
-        answer: 4,
-        description: "France began work on the canal in 1881, but stopped "+
-        "because of engineering problems and a high worker mortality rate. "+
-        "The United States took over the project in 1904 and opened the canal "+
-        "on August 15, 1914. "
-    },
-    {
-        question: "What is a kudzu?",
-        options:["Antelope", "Bird", "Jewish settlement", "Climbing plant"],
-        answer: 4,
-        description: "Today, kudzu is used to treat alcoholism and to reduce " +
-        "symptoms of alcohol hangover, including headache, " +
-        "upset stomach, dizziness, and vomiting. ..."
-    },
-    {
-        question: "After Adam, Eve, Cain and Abel who is the next person " +
-        "mentioned in the Bible?",
-        options:["Enoch", "Jubal", "Lamech", "Zillah"],
-        answer: 1,
-        description:"He was of the Antediluvian period in the Hebrew Bible."
-    }
-
-];
-
 const DQS = (el) => document.querySelector(el);
 const startQuizBtn = DQS(".start-quiz-btn");
 const questionText = DQS(".question-text");
@@ -58,7 +15,7 @@ const quizOverBox = DQS(".quiz-over-box");
 const goToHomeBtn = DQS(".go-home-btn");
 const startAgainBtn = DQS(".start-again-quiz-btn");
 
-
+let questionBank = [];
 let score=0;
 let questionIndex = 0;
 let attempt = 0;
@@ -72,8 +29,22 @@ const unhide = (el) => el.classList.remove("hide");
 
 
 window.addEventListener("DOMContentLoaded", function(){
+    // fetch question from .json file
     quizInit();
     hide(quizBox);
+
+    //return a promise
+    fetch("questions.json")
+    .then(res => {
+        return res.json();
+    }).then(loadedQuestions => {
+        console.log(loadedQuestions);
+        questionBank = loadedQuestions;
+    })
+    .catch(err => {
+        console.error(err);
+    });
+
 });
 
 startQuizBtn.addEventListener("click",() => {
@@ -279,18 +250,18 @@ username.addEventListener("keyup", () => {
 
 
 
-mostRecentScore = localStorage.getItem("mostRecentScore");
+
 const maxHighestScoreNum = 5;
 
 saveHighScore = (e) => {
     e.preventDefault();
     console.log("clicked the save button!");
-
-    const score = {
+    mostRecentScore = localStorage.getItem("mostRecentScore");
+    const newScore = {
         score: mostRecentScore,
         name: username.value
     };
-    highScores.push(score);
+    highScores.push(newScore);
     /* sort the highscore list */
     /* Method adapted from James Q Quick on Youtube. Thanks James! */
     highScores.sort((a,b) => b.score - a.score)
@@ -300,4 +271,12 @@ saveHighScore = (e) => {
 
 
 const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+const highScoresList = document.getElementById("high-score-list");
 
+highScoresList.innerHTML = highScores.map(
+    score => {
+        return `<li class="high-score"> ${score.name} - ${score.score}</li>`;
+    }
+).join("");
+
+highScoresList
