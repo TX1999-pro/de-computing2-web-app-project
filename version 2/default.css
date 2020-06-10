@@ -49,6 +49,7 @@ body{
     margin: 20px auto;
     padding: 30px 30px;
     border-radius: 10px;
+    text-align: center;
 }
 
 .quiz-home-box {
@@ -402,4 +403,36 @@ input {
 
 input::placeholder {
     color: rgb(39, 39, 39);
+}
+
+
+/* high score list (leader board) */
+
+
+.highScores {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+#high-score-list {
+    position: relative;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+    
+}
+
+.high-score {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.high-score:hover {
+    transform: scale(1.05);
+    color: orange;
+    text-shadow: black 0 0.1rem 0.1rem;
+
 }
