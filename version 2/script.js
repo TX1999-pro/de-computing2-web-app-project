@@ -44,10 +44,13 @@ window.addEventListener("DOMContentLoaded", function(){
     .catch(err => {
         console.error(err);
     });
+    setTimeout(loadHomeBox,1500);
+});
+
+function loadHomeBox() {
     hide(loader);
     unhide(quizHomeBox);
-
-});
+}
 
 startQuizBtn.addEventListener("click",() => {
     hide(quizHomeBox);

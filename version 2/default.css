@@ -88,6 +88,7 @@ body{
 
 .quiz-home-box {
     text-align: center;
+    animation:fadeInRight .7s linear forwards;
 }
 
 .quiz-home-box h4{
@@ -323,14 +324,6 @@ body{
     text-align: center;
 }
 
-.quiz-box .next-question .next-question-btn.show:hover {
-    opacity: 0.9;
-    color: white;
-    background-color: orange;
-    
-    transition-duration: 0.2s;
-}
-
 .see-results-btn,.next-question-btn, .answer-description {
     display: none;
 }
@@ -356,7 +349,7 @@ body{
 
 .quiz-over-box.show {
     display: block;
-    animation: fadeInRight 1s ease-in;
+    animation: fadeInRight .7s ease-in;
 }
 
 .quiz-over-box h1{
@@ -457,7 +450,7 @@ input::placeholder {
 
 #loader {
     color: #ffffff;
-    font-size: 90px;
+    font-size: 80px;
     text-indent: -9999em;
     overflow: hidden;
     width: 1em;
