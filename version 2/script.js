@@ -14,6 +14,7 @@ const quizBox = DQS(".quiz-box");
 const quizOverBox = DQS(".quiz-over-box");
 const goToHomeBtn = DQS(".go-home-btn");
 const startAgainBtn = DQS(".start-again-quiz-btn");
+const loader = document.getElementById("loader");
 
 let questionBank = [];
 let score=0;
@@ -31,7 +32,6 @@ const unhide = (el) => el.classList.remove("hide");
 window.addEventListener("DOMContentLoaded", function(){
     // fetch question from .json file
     quizInit();
-    hide(quizBox);
 
     //return a promise
     fetch("questions.json")
@@ -44,6 +44,8 @@ window.addEventListener("DOMContentLoaded", function(){
     .catch(err => {
         console.error(err);
     });
+    hide(loader);
+    unhide(quizHomeBox);
 
 });
 

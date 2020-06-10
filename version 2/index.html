@@ -8,11 +8,12 @@ content="width=device-width, inital-scale=1">
 <link rel="stylesheet" href="default.css">
 
 <body>
-    <div class="quiz-home-box custom-box">
+    <div id="loader"> loading . . .</div>
+    <div class="quiz-home-box custom-box hide">
         <h4> You'll have 15 seconds to answer each question. </h4>
         <button type="button" class="start-quiz-btn btn">Start Quiz Now</button>
     </div>
-    <div class="quiz-box custom-box">
+    <div class="quiz-box custom-box hide">
         <div class="stats">
             <div class="quiz-time">
                 <div class="remaining-time">15</div>
@@ -56,7 +57,7 @@ content="width=device-width, inital-scale=1">
         <button type="button" class="start-again-quiz-btn btn">Start Again</button>
         <button type="button" class="go-home-btn btn">Go To Home</button>
     </div>
-    <div id="end">
+    <div id="end" class="hide">
         <form>
             <input
                 type="text"
@@ -75,7 +76,7 @@ content="width=device-width, inital-scale=1">
             </button>
         </form>
     </div>
-    <div class="custom-box">
+    <div class="custom-box hide">
         <div id="highScores"> 
             <h1 id="final-score">High Scores</h1>
             <ul id="high-score-list"></ul>
