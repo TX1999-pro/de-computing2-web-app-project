@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-gb">
+<meta charset="utf-8" name="viewpoint"
+content="width=device-width, inital-scale=1">
+<title>Quizzzzz 2.0 </title>
+<!-- <script type="module" src="main.js"></script> -->
+
+<link rel="stylesheet" href="default.css">
+
+<body>
+    <div id="loader"> loading . . .</div>
+    <div id="quiz-home-box" class="custom-box">
+        <h4 id="home-message"> You'll have 10 seconds to answer each question. </h4>
+        <button type="button" id="start-quiz-btn" class="btn">Start Quiz Now</button>
+    </div>
+    <div id="quiz-box" class="custom-box">
+        <div class="stats">
+            <div class="quiz-time">
+                <div class="remaining-time">15</div>
+            </div>
+            <span class="time-up-text"> Time's Up!</span>
+            <div class="score-board">
+                <span class="score-text">Score:</span>
+                <span class="correct-answers">0</span>
+            </div>
+        </div>
+        <div id="question-box">
+            <div class="current-question-num">
+                0/0
+            </div>
+            <div id= "question-text">
+                This is an example question
+            </div>
+        </div>
+        <div id="option-box" class="option-box">
+            
+            <template id="options">
+                <div class="option">Example Answer</div>
+            </template>
+        </div>
+        <div id="answer-description">
+            So what? I can't help you either.
+        </div>
+        <div class="next-question">
+            <button type="button" id="next-question-btn" class="btn">Next Question</button>
+            <button type="button" id="see-results-btn" class="btn hide">See Your Result</button>
+        </div>
+    </div>
+
+    <div class="quiz-over-box custom-box">
+        <h1>Quiz Result</h1>
+        <h4> Total Questions: <span class="total-questions">N.A.</span></h4>
+        <h4> Attempt: <span class="total-attempts">N.A.</span></h4>
+        <h4> Correct: <span class="total-correct">N.A.</span></h4>
+        <h4> Wrong: <span class="total-wrong">N.A.</span></h4>
+        <h4> Percentage: <span class="percentage">N.A.</span></h4>
+        <button type="button" id="start-again-quiz-btn" class="btn">Start Again</button>
+        <button type="button" id="go-home-btn" class="btn">Go To Home</button>
+    </div>
+    <div id="end" class="hide">
+        <form>
+            <input
+                type="text"
+                name ="username"
+                id="username"
+                placeholder="username"
+            >
+            <button 
+                type="submit" 
+                class="btn" 
+                id="saveScoreBtn"
+                onclick="saveHighScore(event)"
+                disabled
+            >
+                Save
+            </button>
+        </form>
+    </div>
+    <div class="custom-box hide">
+        <div id="highScores"> 
+            <h1 id="final-score">High Scores</h1>
+            <ul id="high-score-list"></ul>
+        </div>
+    </div>
+    
+    
+<script src="./script.js"></script>
+</body>
+
+

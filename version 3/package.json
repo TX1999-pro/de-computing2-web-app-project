@@ -1,0 +1,25 @@
+{
+  "name": "my-package",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "In this session you will set up your own environment for server-side code.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DE1-Computing-2/week-5-tuesday-TX1999-pro.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DE1-Computing-2/week-5-tuesday-TX1999-pro/issues"
+  },
+  "homepage": "https://github.com/DE1-Computing-2/week-5-tuesday-TX1999-pro#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^4.2.0"
+  }
+}
