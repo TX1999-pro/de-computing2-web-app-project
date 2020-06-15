@@ -19,7 +19,7 @@ const startAgainBtn = el("start-again-quiz-btn");
 const loader = el("loader");
 
 let questionBank = [];
-let score=0;
+let score = 0;
 let questionIndex = 0;
 let attempt = 0;
 let interval = [];
@@ -36,11 +36,11 @@ function shuffle(arr) {
     let index;
     // while there are elements in the arrary
     while (ctr > 0) {
-    // Pick a random index
+        // Pick a random index
         index = Math.floor(Math.random() * ctr);
-    // Decrease ctr by 1
+        // Decrease ctr by 1
         ctr--;
-    // Swap the last element with it
+        // Swap the last element with it
         temp = arr[ctr];
         arr[ctr] = arr[index];
         arr[index] = temp;
@@ -48,11 +48,11 @@ function shuffle(arr) {
     return arr;
 }
 
-window.addEventListener("DOMContentLoaded", function(){
+window.addEventListener("DOMContentLoaded", function() {
     // fetch question from .json file
     //return a promise
     quizInit();
-    setTimeout(loadHomeBox,1500);
+    setTimeout(loadHomeBox, 1500);
 });
 
 function loadHomeBox() {
@@ -60,7 +60,7 @@ function loadHomeBox() {
     show(quizHomeBox);
 }
 
-startQuizBtn.addEventListener("click",() => {
+startQuizBtn.addEventListener("click", () => {
     unshow(quizHomeBox);
     unshow(seeResultBtn);
     show(quizBox);
@@ -71,13 +71,13 @@ startQuizBtn.addEventListener("click",() => {
 
 nextQuestionBtn.addEventListener("click", nextQuestion);
 
-seeResultBtn.addEventListener("click",() => {
+seeResultBtn.addEventListener("click", () => {
     unshow(quizBox)
     show(quizOverBox);
     quizResults();
 });
 
-startAgainBtn.addEventListener("click",() => {
+startAgainBtn.addEventListener("click", () => {
     show(quizBox);
     unshow(quizOverBox);
     unshow(seeResultBtn);
@@ -85,10 +85,10 @@ startAgainBtn.addEventListener("click",() => {
     nextQuestion();
 });
 
-goToHomeBtn.addEventListener("click",() => {
+goToHomeBtn.addEventListener("click", () => {
     unshow(quizOverBox);
     unhide(loader);
-    setTimeout(loadHomeBox,1500);
+    setTimeout(loadHomeBox, 1500);
 });
 
 function loadQuestion() {
@@ -98,17 +98,17 @@ function loadQuestion() {
     createOptions();
     timerStart();
     scoreBoard();
-    currentQuestionNum.innerHTML = (questionIndex+1) + " / "
-     + questionBank.length;
+    currentQuestionNum.innerHTML = (questionIndex + 1) + " / " +
+        questionBank.length;
 }
 
 function createOptions() {
     clearOptionBox();
-    questionBank[questionIndex].options.forEach(function(item, i){
+    questionBank[questionIndex].options.forEach(function(item, i) {
         const option = document.createElement("div");
         option.innerHTML = item;
         option.classList.add("option");
-        option.id = i+1;
+        option.id = i + 1;
         option.setAttribute("onclick", "checkAnswer(this)");
         optionBox.appendChild(option);
     });
@@ -120,15 +120,14 @@ function clearOptionBox() {
 }
 
 function checkAnswer(element) {
-    timerStop ();
-    const id= element.id;
+    timerStop();
+    const id = element.id;
     /* console.log("the answer is " + questionBank[questionIndex].answer); */
     if (id == questionBank[questionIndex].answer) {
         element.classList.add("correct");
         score++;
         scoreBoard();
-    }
-    else {
+    } else {
         element.classList.add("wrong");
         // then show the right option
         showCorrectAnswer();
@@ -139,21 +138,20 @@ function checkAnswer(element) {
     attempt++;
     if (questionIndex < questionBank.length) {
         show(nextQuestionBtn);
-    }
-    else {
+    } else {
         quizOver();
     }
 }
 
 function nextQuestion() {
-        loadQuestion();
-        unshow(answerDescription);
-        unshow(nextQuestionBtn);
-        unshow(timeUpText);
+    loadQuestion();
+    unshow(answerDescription);
+    unshow(nextQuestionBtn);
+    unshow(timeUpText);
 }
 
 function disableSelection() {
-    for(const child of optionBox.children) {
+    for (const child of optionBox.children) {
         child.classList.add("already-answered")
     }
 
@@ -186,14 +184,14 @@ function timerStart() {
     interval = setInterval(() => {
         timeLimit--;
         remainingTime.innerHTML = timeLimit;
-        if (timeLimit < 6 ) {
+        if (timeLimit < 6) {
             remainingTime.classList.add("less-time");
         }
-        if (timeLimit == 0 ){
-                clearInterval(interval);
-                timeIsUp();
+        if (timeLimit == 0) {
+            clearInterval(interval);
+            timeIsUp();
         }
-    },1000);
+    }, 1000);
 }
 
 function timerStop() {
@@ -203,9 +201,9 @@ function timerStop() {
 function timeIsUp() {
     // show time's up text when timer counts down to zero
     timeUpText.classList.add("show")
-    // show correct answer when time is up
-    for(let i=0; i < optionBox.children.length; i++){
-        if(optionBox.children[i].id == questionBank[questionIndex].answer){
+        // show correct answer when time is up
+    for (let i = 0; i < optionBox.children.length; i++) {
+        if (optionBox.children[i].id == questionBank[questionIndex].answer) {
             optionBox.children[i].classList.add("show-correct");
         }
     }
@@ -216,21 +214,21 @@ function timeIsUp() {
     questionIndex++
 }
 
-function showCorrectAnswer(){
-    for(let i=0; i < optionBox.children.length; i++){
-        if(optionBox.children[i].id == questionBank[questionIndex].answer){
+function showCorrectAnswer() {
+    for (let i = 0; i < optionBox.children.length; i++) {
+        if (optionBox.children[i].id == questionBank[questionIndex].answer) {
             optionBox.children[i].classList.add("show-correct");
         }
     }
 }
 
-function quizResults(){
+function quizResults() {
     DQS(".total-questions").innerHTML = questionBank.length;
     DQS(".total-attempts").innerHTML = attempt;
     DQS(".total-correct").innerHTML = score;
     DQS(".total-wrong").innerHTML = attempt - score;
-    const percentage = (score/questionBank.length)*100;
-    DQS(".percentage").innerHTML = percentage.toFixed(2) +"%";
+    const percentage = (score / questionBank.length) * 100;
+    DQS(".percentage").innerHTML = percentage.toFixed(2) + "%";
 
 }
 
@@ -239,21 +237,56 @@ function quizInit() {
     questionIndex = 0;
     attempt = 0;
     interval = [];
-    fetch("questions.json")
-    .then(res => {
-        return res.json();
-    }).then(loadedQuestions => {
-        console.log(loadedQuestions);
-        questionBank = shuffle(loadedQuestions);
-        console.log(questionBank);
-    })
-    .catch(err => {
-        console.error(err); 
-        // catch any error in the debug console**
-        // handle catch case for a promise so when smth went wrong
-        // I know what to do
-    });
-}
+    fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy")
+        .then(res => {
+            return res.json();
+        })
+        .then(loadedQuestions => {
+                console.log(loadedQuestions.results);
+                questionBank = shuffle(loadedQuestions);
+                questionBank = questionBank.results.map(loadedQuestions => {
+                        const formattedQuestion = {
+                            question: loadedQuestions.question
+                        };
+
+                        const answerOptions = [
+                            ...loadedQuestions.incorrect_answers];
+                        formattedQuestion.answer =
+                            Math.floor(Math.random() * 3) + 1;
+                        answerOptions.splice(
+                            formattedQuestion.answer - 1,
+                            0,
+                            loadedQuestions.correct_answer
+                        );
+                        formattedQuestion.options = answerOptions;
+                        console.log(questionBank);
+                        return formattedQuestion;
+                    });
+
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+    // catch any error in the debug console**
+    // handle catch case for a promise so when smth went wrong
+    // I know what to do
+};
+/* fetch("questions.json")
+.then(res => {
+    return res.json();
+}).then(loadedQuestions => {
+    console.log(loadedQuestions);
+    questionBank = shuffle(loadedQuestions);
+    console.log(questionBank);
+})
+.catch(err => {
+    console.error(err); 
+    // catch any error in the debug console**
+    // handle catch case for a promise so when smth went wrong
+    // I know what to do
+}); */
+
+
 
 function quizOver() {
     unshow(nextQuestionBtn);
@@ -287,7 +320,7 @@ saveHighScore = (e) => {
     highScores.push(newScore);
     /* sort the highscore list */
     /* Method adapted from James Q Quick on Youtube. Thanks James! */
-    highScores.sort((a,b) => b.score - a.score)
+    highScores.sort((a, b) => b.score - a.score)
     highScores.splice(5);
     localStorage.setItem("highScores", JSON.stringify(highScores));
 }
