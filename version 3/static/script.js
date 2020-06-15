@@ -237,6 +237,7 @@ function quizInit() {
     questionIndex = 0;
     attempt = 0;
     interval = [];
+    /* 
     fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy")
         .then(res => {
             return res.json();
@@ -267,24 +268,26 @@ function quizInit() {
                 .catch(err => {
                     console.error(err);
                 })
+     */
     // catch any error in the debug console**
     // handle catch case for a promise so when smth went wrong
     // I know what to do
+    fetch("questions.json")
+        .then(res => {
+            return res.json();
+        }).then(loadedQuestions => {
+            console.log(loadedQuestions);
+            questionBank = shuffle(loadedQuestions);
+            console.log(questionBank);
+        })
+        .catch(err => {
+        console.error(err);
+    // catch any error in the debug console**
+    // handle catch case for a promise so when smth went wrong
+    // I know what to do
+        });
 };
-/* fetch("questions.json")
-.then(res => {
-    return res.json();
-}).then(loadedQuestions => {
-    console.log(loadedQuestions);
-    questionBank = shuffle(loadedQuestions);
-    console.log(questionBank);
-})
-.catch(err => {
-    console.error(err); 
-    // catch any error in the debug console**
-    // handle catch case for a promise so when smth went wrong
-    // I know what to do
-}); */
+
 
 
 
