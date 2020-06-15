@@ -1,20 +1,22 @@
+const el = (id) => document.getElementById(id);
 const DQS = (el) => document.querySelector(el);
-const startQuizBtn = DQS(".start-quiz-btn");
-const questionText = DQS(".question-text");
-const optionBox = DQS(".option-box");
-const answerDescription = DQS(".answer-description");
-const nextQuestionBtn = DQS(".next-question-btn");
-const seeResultBtn = DQS(".see-results-btn");
+
+const startQuizBtn = el("start-quiz-btn");
+const questionText = el("question-text");
+const optionBox = el("option-box");
+const answerDescription = el("answer-description");
+const nextQuestionBtn = el("next-question-btn");
+const seeResultBtn = el("see-results-btn");
 const currentQuestionNum = DQS(".current-question-num");
 const correctAnswer = DQS(".correct-answers");
 const remainingTime = DQS(".remaining-time");
 const timeUpText = DQS(".time-up-text");
-const quizHomeBox = DQS(".quiz-home-box");
-const quizBox = DQS(".quiz-box");
+const quizHomeBox = el("quiz-home-box");
+const quizBox = el("quiz-box");
 const quizOverBox = DQS(".quiz-over-box");
-const goToHomeBtn = DQS(".go-home-btn");
-const startAgainBtn = DQS(".start-again-quiz-btn");
-const loader = document.getElementById("loader");
+const goToHomeBtn = el("go-home-btn");
+const startAgainBtn = el("start-again-quiz-btn");
+const loader = el("loader");
 
 let questionBank = [];
 let score=0;
@@ -28,35 +30,41 @@ const hide = (el) => el.classList.add("hide");
 const unshow = (el) => el.classList.remove("show");
 const unhide = (el) => el.classList.remove("hide");
 
+function shuffle(arr) {
+    let ctr = arr.length;
+    let temp;
+    let index;
+    // while there are elements in the arrary
+    while (ctr > 0) {
+    // Pick a random index
+        index = Math.floor(Math.random() * ctr);
+    // Decrease ctr by 1
+        ctr--;
+    // Swap the last element with it
+        temp = arr[ctr];
+        arr[ctr] = arr[index];
+        arr[index] = temp;
+    }
+    return arr;
+}
 
 window.addEventListener("DOMContentLoaded", function(){
     // fetch question from .json file
-    quizInit();
-
     //return a promise
-    fetch("questions.json")
-    .then(res => {
-        return res.json();
-    }).then(loadedQuestions => {
-        console.log(loadedQuestions);
-        questionBank = loadedQuestions;
-    })
-    .catch(err => {
-        console.error(err);
-    });
+    quizInit();
     setTimeout(loadHomeBox,1500);
 });
 
 function loadHomeBox() {
     hide(loader);
-    unhide(quizHomeBox);
+    show(quizHomeBox);
 }
 
 startQuizBtn.addEventListener("click",() => {
-    hide(quizHomeBox);
+    unshow(quizHomeBox);
     unshow(seeResultBtn);
-    unhide(quizBox);
     show(quizBox);
+    quizInit();
     loadQuestion();
 });
 
@@ -64,28 +72,27 @@ startQuizBtn.addEventListener("click",() => {
 nextQuestionBtn.addEventListener("click", nextQuestion);
 
 seeResultBtn.addEventListener("click",() => {
-    hide(quizBox)
+    unshow(quizBox)
     show(quizOverBox);
     quizResults();
 });
 
-goToHomeBtn.addEventListener("click",() => {
-    unshow(quizOverBox);
-    hide(quizOverBox);
-    unhide(quizHomeBox);
-    quizInit();
-});
-
-
 startAgainBtn.addEventListener("click",() => {
-    quizBox.style.display = "block";
+    show(quizBox);
     unshow(quizOverBox);
     unshow(seeResultBtn);
     quizInit();
     nextQuestion();
 });
 
+goToHomeBtn.addEventListener("click",() => {
+    unshow(quizOverBox);
+    unhide(loader);
+    setTimeout(loadHomeBox,1500);
+});
+
 function loadQuestion() {
+    const q = Math.floor(Math.random() * questionBank.length);
     questionText.innerHTML = questionBank[questionIndex].question;
     /* console.log(questionBank[questionIndex].question); */
     createOptions();
@@ -109,7 +116,7 @@ function createOptions() {
 
 function clearOptionBox() {
     optionBox.innerHTML = "";
-    answerDescription.classList.remove("show");
+    unshow(answerDescription);
 }
 
 function checkAnswer(element) {
@@ -131,7 +138,7 @@ function checkAnswer(element) {
     questionIndex++;
     attempt++;
     if (questionIndex < questionBank.length) {
-        showNextQuestionBtn();
+        show(nextQuestionBtn);
     }
     else {
         quizOver();
@@ -166,9 +173,6 @@ function showAnswerDescription() {
     }
 }
 
-function showNextQuestionBtn() {
-    show(nextQuestionBtn);
-}
 
 function scoreBoard() {
     correctAnswer.innerHTML = score;
@@ -207,7 +211,7 @@ function timeIsUp() {
     }
     disableSelection();
     showAnswerDescription();
-    showNextQuestionBtn();
+    show(nextQuestionBtn)
     showCorrectAnswer();
     questionIndex++
 }
@@ -231,10 +235,24 @@ function quizResults(){
 }
 
 function quizInit() {
-    score=0;
+    score = 0;
     questionIndex = 0;
     attempt = 0;
     interval = [];
+    fetch("questions.json")
+    .then(res => {
+        return res.json();
+    }).then(loadedQuestions => {
+        console.log(loadedQuestions);
+        questionBank = shuffle(loadedQuestions);
+        console.log(questionBank);
+    })
+    .catch(err => {
+        console.error(err); 
+        // catch any error in the debug console**
+        // handle catch case for a promise so when smth went wrong
+        // I know what to do
+    });
 }
 
 function quizOver() {
