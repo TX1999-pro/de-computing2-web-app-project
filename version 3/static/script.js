@@ -17,6 +17,7 @@ const quizOverBox = DQS(".quiz-over-box");
 const goToHomeBtn = el("go-home-btn");
 const startAgainBtn = el("start-again-quiz-btn");
 const loader = el("loader");
+const demoQuizBtn = el("demo-quiz-btn");
 
 let questionBank = [];
 let score = 0;
@@ -24,6 +25,7 @@ let questionIndex = 0;
 let attempt = 0;
 let interval = [];
 let mostRecentScore = 0;
+let userNumber = 10;
 
 const show = (el) => el.classList.add("show");
 const hide = (el) => el.classList.add("hide");
@@ -53,41 +55,53 @@ window.addEventListener("DOMContentLoaded", function() {
     //return a promise
     quizInit();
     setTimeout(loadHomeBox, 1500);
+
 });
 
 function loadHomeBox() {
     hide(loader);
     show(quizHomeBox);
 }
-
-startQuizBtn.addEventListener("click", () => {
+demoQuizBtn.addEventListener("click", ()=> {
+    DemoQuestion_init();
+    loadQuestion();
     unshow(quizHomeBox);
     unshow(seeResultBtn);
     show(quizBox);
-    quizInit();
+    
+});
+
+startQuizBtn.addEventListener("click", () => {
     loadQuestion();
+    unshow(quizHomeBox);
+    unshow(seeResultBtn);
+    show(quizBox);
 });
 
 
 nextQuestionBtn.addEventListener("click", nextQuestion);
 
 seeResultBtn.addEventListener("click", () => {
-    unshow(quizBox)
-    show(quizOverBox);
     quizResults();
+    unshow(quizBox);
+    show(quizOverBox);
 });
 
 startAgainBtn.addEventListener("click", () => {
+
+    quizInit();
+    nextQuestion();
     show(quizBox);
     unshow(quizOverBox);
     unshow(seeResultBtn);
-    quizInit();
-    nextQuestion();
 });
 
 goToHomeBtn.addEventListener("click", () => {
     unshow(quizOverBox);
     unhide(loader);
+    quizInit();
+    hide(demoQuizBtn);
+    DQS(".instruction-message").innerHTML = "Click the button below to start";
     setTimeout(loadHomeBox, 1500);
 });
 
@@ -237,7 +251,10 @@ function quizInit() {
     questionIndex = 0;
     attempt = 0;
     interval = [];
-    /* 
+    // informs user he is the xth one loading this web
+    userNumber++;
+    document.getElementById("user-num").innerHTML = userNumber + "th";
+
     fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy")
         .then(res => {
             return res.json();
@@ -267,11 +284,11 @@ function quizInit() {
                 })
                 .catch(err => {
                     console.error(err);
-                })
-     */
+                });
     // catch any error in the debug console**
     // handle catch case for a promise so when smth went wrong
     // I know what to do
+    /*
     fetch("questions.json")
         .then(res => {
             return res.json();
@@ -286,10 +303,32 @@ function quizInit() {
     // handle catch case for a promise so when smth went wrong
     // I know what to do
         });
+    
+    */
 };
 
 
-
+function DemoQuestion_init() {
+    // this will load demo questions from a json file
+    score = 0;
+    questionIndex = 0;
+    attempt = 0;
+    interval = [];
+    fetch("./demoQuestions.json")
+        .then(res => {
+            return res.json();
+        }).then(loadedQuestions => {
+            console.log(loadedQuestions);
+            questionBank = shuffle(loadedQuestions);
+            console.log(questionBank);
+        })
+        .catch(err => {
+        console.error(err);
+    // catch any error in the debug console**
+    // handle catch case for a promise so when smth went wrong
+    // I know what to do
+        });
+};
 
 function quizOver() {
     unshow(nextQuestionBtn);

@@ -2,7 +2,7 @@
 <html lang="en-gb">
 <meta charset="utf-8" name="viewpoint"
 content="width=device-width, inital-scale=1">
-<title>Quizzzzz 2.0 </title>
+<title>Quizzzzz 2.1 </title>
 <!-- <script type="module" src="main.js"></script> -->
 
 <link rel="stylesheet" href="default.css">
@@ -10,7 +10,12 @@ content="width=device-width, inital-scale=1">
 <body>
     <div id="loader"> loading . . .</div>
     <div id="quiz-home-box" class="custom-box">
-        <h4 id="home-message"> You'll have 10 seconds to answer each question. </h4>
+        <h4 id="home-heading"> Welcome to Quizopia! </h4>
+        <p id="home-message"> Hi Challenger, you are the <span id="user-num">xxxth</span> people who opened this app.
+            See how good you are compared to the other challengers! Let's go!
+        </p>
+        <h5 class="instruction-message">Click 'Demo' to learn how this game works.</h5>
+        <button type="button" id="demo-quiz-btn" class="btn"> Demo </button>
         <button type="button" id="start-quiz-btn" class="btn">Start Quiz Now</button>
     </div>
     <div id="quiz-box" class="custom-box">
