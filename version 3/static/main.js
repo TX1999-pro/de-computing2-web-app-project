@@ -1,5 +1,5 @@
-import script from "./script.js";
+import UI from "./script.js";
 
 window.addEventListener("DOMContentLoaded", function () {
-    console.log("hi");
+    UI.init();
 });
