@@ -1,4 +1,5 @@
 import F from "./function.js";
+
 const UI = Object.create(null);
 
 
@@ -162,17 +163,12 @@ UI.init = function() {
             option.innerHTML = item;
             option.classList.add("option");
             option.id = i + 1;
-            option.setAttribute("onclick", "checkAnswer(this)");
+            option.addEventListener("click", () => checkAnswer(option));
             optionBox.appendChild(option);
         });
     }
 
-    function clearOptionBox() {
-        optionBox.innerHTML = "";
-        unshow(answerDescription);
-    }
-
-    function checkAnswer(element) {
+        function checkAnswer(element) {
         timerStop();
         const id = element.id;
         /* console.log("the answer is " + questionBank[questionIndex].answer); */
@@ -194,6 +190,11 @@ UI.init = function() {
         } else {
             quizOver();
         }
+    }
+
+    function clearOptionBox() {
+        optionBox.innerHTML = "";
+        unshow(answerDescription);
     }
 
     function nextQuestion() {

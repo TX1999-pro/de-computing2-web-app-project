@@ -301,7 +301,7 @@ body{
 }
 
 #option-box .option.correct {
-    background-color: rgb(16, 160, 16);
+    background-color: rgb(67, 255, 155);
     border-color: #059e4C;
     color: black;
     animation: pulse 0.5s linear ;
@@ -315,9 +315,10 @@ body{
     right: 20px;
     top: 15px;
     border-radius: 20px;
+    border-color: green;
     background-color: white;
     background-image: url("./images/tick-correct-img.png");
-    background-size: 32px;
+    background-size: 35px;
     background-position: center;
     background-repeat: no-repeat; 
     animation: pulse 0.5s ease-in-out;
@@ -360,8 +361,8 @@ body{
     margin-top: 50px;
     padding: 20px;
     color: #555555;
-    font-size: 14px;
-    font-weight: lighter;
+    font-size: 18px;
+    font-weight: normal;
 }
 
 .next-question {
