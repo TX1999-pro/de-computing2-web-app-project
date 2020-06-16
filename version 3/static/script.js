@@ -17,7 +17,7 @@ const quizOverBox = DQS(".quiz-over-box");
 const goToHomeBtn = el("go-home-btn");
 const startAgainBtn = el("start-again-quiz-btn");
 const loader = el("loader");
-const demoQuizBtn = el("demo-quiz-btn");
+/* const demoQuizBtn = el("demo-quiz-btn"); */
 
 let questionBank = [];
 let score = 0;
@@ -51,8 +51,7 @@ function shuffle(arr) {
 }
 
 window.addEventListener("DOMContentLoaded", function() {
-    // fetch question from .json file
-    //return a promise
+    document.getElementById("user-num").innerHTML = userNumber + "th";
     quizInit();
     setTimeout(loadHomeBox, 1500);
 
@@ -62,14 +61,12 @@ function loadHomeBox() {
     hide(loader);
     show(quizHomeBox);
 }
-demoQuizBtn.addEventListener("click", ()=> {
-    DemoQuestion_init();
+/* demoQuizBtn.addEventListener("click", () => {
+    demoQuestion_init();
     loadQuestion();
     unshow(quizHomeBox);
-    unshow(seeResultBtn);
     show(quizBox);
-    
-});
+}); */
 
 startQuizBtn.addEventListener("click", () => {
     loadQuestion();
@@ -100,10 +97,66 @@ goToHomeBtn.addEventListener("click", () => {
     unshow(quizOverBox);
     unhide(loader);
     quizInit();
-    hide(demoQuizBtn);
-    DQS(".instruction-message").innerHTML = "Click the button below to start";
-    setTimeout(loadHomeBox, 1500);
+    setTimeout(loadHomeBox,     1500);
 });
+
+function quizInit() {
+    userNumber++;
+    document.getElementById("user-num").innerHTML = userNumber + "th";
+    score = 0;
+    questionIndex = 0;
+    attempt = 0;
+    interval = [];
+    // informs user he is the xth one loading this web
+    /*
+    fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy")
+        .then(res => {
+            return res.json();
+        })
+        .then(loadedQuestions => {
+                questionBank = shuffle(loadedQuestions);
+                questionBank = questionBank.results.map(loadedQuestions => {
+                        const formattedQuestion = {
+                            question: loadedQuestions.question
+                        };
+
+                        const answerOptions = [
+                            ...loadedQuestions.incorrect_answers];
+                        formattedQuestion.answer =
+                            Math.floor(Math.random() * 3) + 1;
+                        answerOptions.splice(
+                            formattedQuestion.answer - 1,
+                            0,
+                            loadedQuestions.correct_answer
+                        );
+                        formattedQuestion.options = answerOptions;
+                        //console.log(questionBank); 
+                        return formattedQuestion;
+                    });
+
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+            */
+    // catch any error in the debug console**
+    // handle catch case for a promise so when smth went wrong
+    // I know what to do
+    fetch("demoQuestions.json")
+        .then(res => {
+            return res.json();
+        }).then(loadedQuestions => {
+            questionBank = shuffle(loadedQuestions);
+            // console.log(questionBank);
+        })
+        .catch(err => 
+        {
+            console.error(err);
+            // catch any error in the debug console**
+            // handle catch case for a promise so when smth went wrong
+            // I know what to do
+        });
+};
 
 function loadQuestion() {
     const q = Math.floor(Math.random() * questionBank.length);
@@ -119,7 +172,7 @@ function loadQuestion() {
 function createOptions() {
     clearOptionBox();
     questionBank[questionIndex].options.forEach(function(item, i) {
-        const option = document.createElement("div");
+        const option = document.createElement("button");
         option.innerHTML = item;
         option.classList.add("option");
         option.id = i + 1;
@@ -246,69 +299,8 @@ function quizResults() {
 
 }
 
-function quizInit() {
-    score = 0;
-    questionIndex = 0;
-    attempt = 0;
-    interval = [];
-    // informs user he is the xth one loading this web
-    userNumber++;
-    document.getElementById("user-num").innerHTML = userNumber + "th";
 
-    fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy")
-        .then(res => {
-            return res.json();
-        })
-        .then(loadedQuestions => {
-                console.log(loadedQuestions.results);
-                questionBank = shuffle(loadedQuestions);
-                questionBank = questionBank.results.map(loadedQuestions => {
-                        const formattedQuestion = {
-                            question: loadedQuestions.question
-                        };
-
-                        const answerOptions = [
-                            ...loadedQuestions.incorrect_answers];
-                        formattedQuestion.answer =
-                            Math.floor(Math.random() * 3) + 1;
-                        answerOptions.splice(
-                            formattedQuestion.answer - 1,
-                            0,
-                            loadedQuestions.correct_answer
-                        );
-                        formattedQuestion.options = answerOptions;
-                        console.log(questionBank);
-                        return formattedQuestion;
-                    });
-
-                })
-                .catch(err => {
-                    console.error(err);
-                });
-    // catch any error in the debug console**
-    // handle catch case for a promise so when smth went wrong
-    // I know what to do
-    /*
-    fetch("questions.json")
-        .then(res => {
-            return res.json();
-        }).then(loadedQuestions => {
-            console.log(loadedQuestions);
-            questionBank = shuffle(loadedQuestions);
-            console.log(questionBank);
-        })
-        .catch(err => {
-        console.error(err);
-    // catch any error in the debug console**
-    // handle catch case for a promise so when smth went wrong
-    // I know what to do
-        });
-    
-    */
-};
-
-
-function DemoQuestion_init() {
+/* function demoQuestion_init() {
     // this will load demo questions from a json file
     score = 0;
     questionIndex = 0;
@@ -318,9 +310,7 @@ function DemoQuestion_init() {
         .then(res => {
             return res.json();
         }).then(loadedQuestions => {
-            console.log(loadedQuestions);
-            questionBank = shuffle(loadedQuestions);
-            console.log(questionBank);
+            questionBank = loadedQuestions;
         })
         .catch(err => {
         console.error(err);
@@ -328,7 +318,7 @@ function DemoQuestion_init() {
     // handle catch case for a promise so when smth went wrong
     // I know what to do
         });
-};
+}; */
 
 function quizOver() {
     unshow(nextQuestionBtn);

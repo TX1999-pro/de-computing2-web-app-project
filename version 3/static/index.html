@@ -3,36 +3,40 @@
 <meta charset="utf-8" name="viewpoint"
 content="width=device-width, inital-scale=1">
 <title>Quizzzzz 2.1 </title>
+
 <!-- <script type="module" src="main.js"></script> -->
 
 <link rel="stylesheet" href="default.css">
 
-<body>
+<main>
     <div id="loader"> loading . . .</div>
     <div id="quiz-home-box" class="custom-box">
-        <h4 id="home-heading"> Welcome to Quizopia! </h4>
-        <p id="home-message"> Hi Challenger, you are the <span id="user-num">xxxth</span> people who opened this app.
-            See how good you are compared to the other challengers! Let's go!
+        <h1 id="home-heading"> Welcome to Quizopia! </h1>
+        <p class="home-message"> 
+        Hi Challenger, you are the <span id="user-num">xxxth</span> people who opened this app. 
         </p>
-        <h5 class="instruction-message">Click 'Demo' to learn how this game works.</h5>
-        <button type="button" id="demo-quiz-btn" class="btn"> Demo </button>
+        <p class="home-message">Time to test your general knowledge!</p>
+        <p class="home-message">You have 15 seconds for each question. </p>
+        
+        <!-- <button type="button" id="demo-quiz-btn" class="btn hide"> Demo </button> -->
         <button type="button" id="start-quiz-btn" class="btn">Start Quiz Now</button>
+        <!-- <h2 class="instruction-message">Click 'Demo' to learn how this game works. </h5> -->
     </div>
     <div id="quiz-box" class="custom-box">
         <div class="stats">
             <div class="quiz-time">
                 <div class="remaining-time">15</div>
             </div>
-            <span class="time-up-text"> Time's Up!</span>
+            <span class="time-up-text"> <h2>Time's Up!</h2></span>
             <div class="score-board">
                 <span class="score-text">Score:</span>
                 <span class="correct-answers">0</span>
             </div>
         </div>
         <div id="question-box">
-            <div class="current-question-num">
+            <h1 class="current-question-num">
                 0/0
-            </div>
+            </h1>
             <div id= "question-text">
                 This is an example question
             </div>
@@ -40,7 +44,7 @@ content="width=device-width, inital-scale=1">
         <div id="option-box" class="option-box">
             
             <template id="options">
-                <div class="option">Example Answer</div>
+                <button class="option">Example Answer</button>
             </template>
         </div>
         <div id="answer-description">
@@ -54,11 +58,11 @@ content="width=device-width, inital-scale=1">
 
     <div class="quiz-over-box custom-box">
         <h1>Quiz Result</h1>
-        <h4> Total Questions: <span class="total-questions">N.A.</span></h4>
-        <h4> Attempt: <span class="total-attempts">N.A.</span></h4>
-        <h4> Correct: <span class="total-correct">N.A.</span></h4>
-        <h4> Wrong: <span class="total-wrong">N.A.</span></h4>
-        <h4> Percentage: <span class="percentage">N.A.</span></h4>
+        <h2> Total Questions: <span class="total-questions">N.A.</span></h2>
+        <h2> Attempt: <span class="total-attempts">N.A.</span></h2>
+        <h2> Correct: <span class="total-correct">N.A.</span></h2>
+        <h2> Wrong: <span class="total-wrong">N.A.</span></h2>
+        <h2> Percentage: <span class="percentage">N.A.</span></h2>
         <button type="button" id="start-again-quiz-btn" class="btn">Start Again</button>
         <button type="button" id="go-home-btn" class="btn">Go To Home</button>
     </div>
@@ -87,9 +91,8 @@ content="width=device-width, inital-scale=1">
             <ul id="high-score-list"></ul>
         </div>
     </div>
-    
-    
 <script src="./script.js"></script>
-</body>
+</main>
+
 
 
