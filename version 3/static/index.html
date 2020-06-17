@@ -67,30 +67,29 @@ content="width=device-width, inital-scale=1">
         <button type="button" id="start-again-quiz-btn" class="btn">Start Again</button>
         <button type="button" id="go-home-btn" class="btn">Go To Home</button>
     </div>
-    <div id="end" class="hide">
-        <form>
+    <div id="end-request" class="custom-box">
+        <h1>Save your score to enter the Leaderboard</h1>
+        <div id="save-username">
+            <label for="username">Create Your Username</label>
             <input
                 type="text"
                 name ="username"
                 id="username"
-                placeholder="username"
+                placeholder="Be polite..."
             >
             <button 
-                type="submit" 
+                type="button" 
                 class="btn" 
                 id="saveScoreBtn"
-                onclick="saveHighScore(event)"
                 disabled
             >
                 Save
             </button>
-        </form>
-    </div>
-    <div class="custom-box hide">
-        <div id="highScores"> 
-            <h1 id="final-score">High Scores</h1>
-            <ul id="high-score-list"></ul>
         </div>
+    </div>
+    <div id="leaderboard" class="custom-box"> 
+            <h1 id="final-score">Leaderboard</h1>
+            <ul id="high-score-list"></ul>
     </div>
 
 </main>

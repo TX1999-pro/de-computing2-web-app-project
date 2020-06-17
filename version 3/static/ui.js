@@ -1,4 +1,6 @@
 import F from "./function.js";
+import Ajax from "./ajax.js";
+import leaderboard from "./leaderboard.js";
 
 const UI = Object.create(null);
 
@@ -22,6 +24,7 @@ const quizOverBox = DQS(".quiz-over-box");
 const goToHomeBtn = el("go-home-btn");
 const startAgainBtn = el("start-again-quiz-btn");
 const loader = el("loader");
+const endRequest = el("end-request");
 /* const demoQuizBtn = el("demo-quiz-btn"); */
 
 let questionBank = [];
@@ -58,8 +61,8 @@ UI.init = function() {
     startQuizBtn.addEventListener("click", () => {
         loadQuestion();
         unshow(quizHomeBox);
-        unshow(seeResultBtn);
         show(quizBox);
+        show(endRequest);
     });
 
 
@@ -69,6 +72,7 @@ UI.init = function() {
         quizResults();
         unshow(quizBox);
         show(quizOverBox);
+        show(endRequest);
     });
 
     startAgainBtn.addEventListener("click", () => {
@@ -285,75 +289,44 @@ UI.init = function() {
 
     }
 
-
-    /* function demoQuestion_init() {
-        // this will load demo questions from a json file
-        score = 0;
-        questionIndex = 0;
-        attempt = 0;
-        interval = [];
-        fetch("./demoQuestions.json")
-            .then(res => {
-                return res.json();
-            }).then(loadedQuestions => {
-                questionBank = loadedQuestions;
-            })
-            .catch(err => {
-            console.error(err);
-        // catch any error in the debug console**
-        // handle catch case for a promise so when smth went wrong
-        // I know what to do
-            });
-    }; */
-
     function quizOver() {
         unshow(nextQuestionBtn);
         show(seeResultBtn);
-        /* mostRecentScore = score; */
         /* console.log("quiz over!") */
-        localStorage.setItem("MostRecentScore", score);
     }
 
     /* username and score info */
 
     const username = document.getElementById("username");
     const saveScoreBtn = document.getElementById("saveScoreBtn");
+    const highScores = [];
+    const highScoresList = el("high-score-list");
+    const leaderBoard = el("leaderboard")
+
     username.addEventListener("keyup", () => {
+        // prevent empty input being sent
         saveScoreBtn.disabled = !username.value;
     });
+    saveScoreBtn.addEventListener("click", () => {
+        console.log("clicked the save button!");
+        leaderboard.update(username.value, score, highScores);
+        hide(endRequest);
+        unhide(leaderBoard);
+    });
+
+    highScoresList.innerHTML = highScores.map(
+        score => {
+            return `<li class="high-score"> ${score.name} - ${score.score}</li>`;
+        }
+    ).join("");
+
+
+
 }
 
 export default Object.freeze(UI);
 
 /*
-const maxHighestScoreNum = 5;
 
-saveHighScore = (e) => {
-    e.preventDefault();
-    console.log("clicked the save button!");
-    mostRecentScore = localStorage.getItem("mostRecentScore");
-    const newScore = {
-        score: mostRecentScore,
-        name: username.value
-    };
-    highScores.push(newScore);
-    // sort the highscore list
-    // Method adapted from James Q Quick on Youtube. Thanks James!
-    highScores.sort((a, b) => b.score - a.score)
-    highScores.splice(5);
-    localStorage.setItem("highScores", JSON.stringify(highScores));
-}
-
-
-const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-const highScoresList = document.getElementById("high-score-list");
-
-highScoresList.innerHTML = highScores.map(
-    score => {
-        return `<li class="high-score"> ${score.name} - ${score.score}</li>`;
-    }
-).join("");
-
-highScoresList
 
 */

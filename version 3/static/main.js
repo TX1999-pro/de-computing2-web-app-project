@@ -1,4 +1,4 @@
-import UI from "./script.js";
+import UI from "./ui.js";
 
 window.addEventListener("DOMContentLoaded", function () {
     UI.init();
