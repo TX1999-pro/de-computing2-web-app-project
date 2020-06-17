@@ -88,8 +88,17 @@ content="width=device-width, inital-scale=1">
         </div>
     </div>
     <div id="leaderboard" class="custom-box"> 
-            <h1 id="final-score"> Leaderboard</h1>
-            <ul id="high-score-list"></ul>
+            <h1 id="leaderboard-header"> Leaderboard</h1>
+            
+            <div class="high-score-list" role="listbox" aria-label="Quiz High Score">
+                <h2 id="score-header">Correct Answers</h2>
+                <h2 id="username-header">Challenger ID</h2>
+                
+            </div>
+            <div class="high-score-list">
+                <ul id="score-list" class="result-list"></ul>
+                <ul id="username-list" class="result-list"></ul>
+            </div>
     </div>
 
 </main>

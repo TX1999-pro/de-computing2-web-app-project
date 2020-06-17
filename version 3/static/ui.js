@@ -312,23 +312,25 @@ UI.init = function() {
         if (event.key !== "Enter" || event.shiftKey) {
             return; // do nothing special
         }
-        const request = {
-            "username": "username.value"
-        };
-        console.log(request);
-        const response = Ajax.query(request);
-
-       /*  const responseMessage = response.then((res) => res.message);
-
-        responseMessage.then(function (msg) {
-            display.textContent = msg;
-        }); */
-
-        response.then(function(obj){
-            highScoresList.innerHTML = `<li class="high-score"> ${obj.message} </li>`;
-        })
+        submitScore();
         event.preventDefault();
     };
+
+    function submitScore(){
+        const request = {
+            "username": username.value,
+            "score": score,
+            "time": "to be implemented"
+        };
+        console.log("the request created is");
+        console.log(request);
+        const response = Ajax.query(request);
+        console.log("the response from ajax query is ");
+        console.log(response);
+        response.then(function(obj){
+            leaderboard.update(obj);
+        })
+    }
     /* saveScoreBtn.addEventListener("click", (event) => {
         console.log("clicked the save button!");
         if (event.key !== "enter" || event.shiftKey) {
@@ -342,11 +344,11 @@ UI.init = function() {
         event.preventDefault();
     }); */
 
-    highScoresList.innerHTML = highScores.map(
+    /* highScoresList.innerHTML = highScores.map(
         score => {
             return `<li class="high-score"> ${score.name} - ${score.score}</li>`;
         }
-    ).join("");
+    ).join(""); */
 
 
 

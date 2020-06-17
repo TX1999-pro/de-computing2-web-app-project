@@ -77,6 +77,21 @@ body{
     background-size: cover;
 }
 
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #444444;
+    margin: 0 0 30px;
+}
+
+h2 {
+    font-size: 24px;
+    font-style: oblique;
+    font-weight: 600;
+    color: #444444;
+    margin: 0 0 30px;
+}
+
 .custom-box {
     max-width: 800px;
     background-color: #ffffff;
@@ -95,12 +110,6 @@ body{
     animation:fadeInRight .7s linear forwards;
 }
 
-#home-heading{
-    font-size: 28px;
-    font-weight: 600;
-    color: #444444;
-    margin: 0 0 30px;
-}
 
 .home-message{
     font-size: 20px;
@@ -462,11 +471,41 @@ input::placeholder {
     align-items: center; 
 }
 
-#high-score-list {
+#leaderboard-header span{
+    display: flex;
+    flex-direction: row; 
+}
+
+.high-score-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     position: relative;
     list-style: none;
-    padding-left: 0;
-    margin-bottom: 2rem;
+    width: 100%;
+}
+
+#score-header {
+    position: relative;
+    padding: 1rem;
+    margin: 1rem;
+    width: 50%;
+}
+
+#username-header {
+    position: relative;
+    padding: 1rem;
+    margin: 1rem;
+    width: 50%;
+}
+
+.result-list {
+    list-style: none;
+    position: relative;
+    width: 50%;
+    align-items: stretch;
+    padding: 1rem;
+    margin: 1rem;
 }
 
 .high-score {
@@ -478,7 +517,7 @@ input::placeholder {
 .high-score:hover {
     transform: scale(1.05);
     color: orange;
-    text-shadow: black 0 0.1rem 0.1rem;
+    text-shadow: black 0 1px;
 
 }
 
