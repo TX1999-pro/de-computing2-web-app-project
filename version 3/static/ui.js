@@ -297,22 +297,50 @@ UI.init = function() {
 
     /* username and score info */
 
-    const username = document.getElementById("username");
-    const saveScoreBtn = document.getElementById("saveScoreBtn");
+    const username = el("username");
+    const saveScoreBtn = el("saveScoreBtn");
     const highScores = [];
-    const highScoresList = el("high-score-list");
     const leaderBoard = el("leaderboard")
+    const highScoresList = el("high-score-list");
 
     username.addEventListener("keyup", () => {
         // prevent empty input being sent
         saveScoreBtn.disabled = !username.value;
     });
-    saveScoreBtn.addEventListener("click", () => {
+
+    username.onkeydown = function(event){
+        if (event.key !== "Enter" || event.shiftKey) {
+            return; // do nothing special
+        }
+        const request = {
+            "username": "username.value"
+        };
+        console.log(request);
+        const response = Ajax.query(request);
+
+       /*  const responseMessage = response.then((res) => res.message);
+
+        responseMessage.then(function (msg) {
+            display.textContent = msg;
+        }); */
+
+        response.then(function(obj){
+            highScoresList.innerHTML = `<li class="high-score"> ${obj.message} </li>`;
+        })
+        event.preventDefault();
+    };
+    /* saveScoreBtn.addEventListener("click", (event) => {
         console.log("clicked the save button!");
-        leaderboard.update(username.value, score, highScores);
-        hide(endRequest);
-        unhide(leaderBoard);
-    });
+        if (event.key !== "enter" || event.shiftKey) {
+            return; // do nothing special
+        }
+        const request = JSON.stringify({
+            "username": username.value
+        });
+
+        console.log(request);
+        event.preventDefault();
+    }); */
 
     highScoresList.innerHTML = highScores.map(
         score => {

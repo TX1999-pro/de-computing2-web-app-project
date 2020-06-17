@@ -9,8 +9,8 @@ const app = express();
 })); */
 
 app.use("/", express.static("static"));
-
 app.use("/", express.json());
+
 app.post("/", function (req, res) {
     const responseObj = handler(req.body);
     res.setHeader("Content-Type", "application/json");
