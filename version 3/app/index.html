@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en-gb">
+<meta charset="utf-8" name="viewpoint"
+content="width=device-width, inital-scale=1">
+<title>Quizzzzz 2.1 </title>
+<script type="module" src="./main.js"></script>
+
+<!-- <script type="module" src="main.js"></script> -->
+
+<link rel="stylesheet" href="default.css">
+
+<main>
+    <div id="loader"> loading . . .</div>
+    <div id="quiz-home-box" class="custom-box">
+        <h1 id="home-heading"> Welcome to Quizopia! </h1>
+        <p class="home-message"> 
+        Hi Challenger, you are the <span id="user-num">xxxth</span> people who opened this app. 
+        </p>
+        <p class="home-message">Time to test your general knowledge!</p>
+        <p class="home-message">You have 15 seconds for each question. </p>
+        
+        <!-- <button type="button" id="demo-quiz-btn" class="btn hide"> Demo </button> -->
+        <button type="button" id="start-quiz-btn" class="btn">Start Quiz Now</button>
+        <!-- <h2 class="instruction-message">Click 'Demo' to learn how this game works. </h5> -->
+    </div>
+    <div id="quiz-box" class="custom-box">
+        <div class="stats">
+            <div class="quiz-time">
+                <div class="remaining-time">15</div>
+            </div>
+            <span class="time-up-text"> <h2>Time's Up!</h2></span>
+            <div class="score-board">
+                <span class="score-text">Score:</span>
+                <span class="correct-answers">0</span>
+            </div>
+        </div>
+        <div id="question-box">
+            <h1 class="current-question-num">
+                0/0
+            </h1>
+            <div id= "question-text">
+                This is an example question
+            </div>
+        </div>
+        <div id="option-box" class="option-box">
+            
+            <template id="options">
+                <button class="option">Example Answer</button>
+            </template>
+        </div>
+        <div id="answer-description">
+            So what? I can't help you either.
+        </div>
+        <div class="next-question">
+            <button type="button" id="next-question-btn" class="btn">Next Question</button>
+            <button type="button" id="see-results-btn" class="btn hide">See Your Result</button>
+        </div>
+    </div>
+
+    <div class="quiz-over-box custom-box">
+        <h1>Quiz Result</h1>
+        <h2> Total Questions: <span class="total-questions">N.A.</span></h2>
+        <h2> Attempt: <span class="total-attempts">N.A.</span></h2>
+        <h2> Correct: <span class="total-correct">N.A.</span></h2>
+        <h2> Wrong: <span class="total-wrong">N.A.</span></h2>
+        <h2> Percentage: <span class="percentage">N.A.</span></h2>
+        <button type="button" id="start-again-quiz-btn" class="btn">Start Again</button>
+        <button type="button" id="go-home-btn" class="btn">Go To Home</button>
+    </div>
+    <div id="end-request" class="custom-box">
+        <h1>Save your score to enter the Leaderboard</h1>
+        <div id="save-username">
+            <label for="username">
+                Create Your Username
+                 <input
+                    type="text"
+                    name ="username"
+                    id="username"
+                    placeholder="Be polite..."
+                    required
+                    maxlength="15"
+                >
+            </label>
+            <button 
+                type="button" 
+                class="btn" 
+                id="saveScoreBtn"
+                disabled
+            >
+                Save
+            </button>
+        </div>
+    </div>
+    <div id="leaderboard" class="custom-box"> 
+            <h1 id="leaderboard-header"> Leaderboard</h1>
+            
+            <div class="high-score-list" role="listbox" aria-label="Quiz High Score">
+                <h2 id="score-header">Correct Answers</h2>
+                <h2 id="username-header">Challenger ID</h2>
+                
+            </div>
+            <div class="high-score-list">
+                <ul id="score-list" class="result-list"></ul>
+                <ul id="username-list" class="result-list"></ul>
+            </div>
+    </div>
+
+</main>
+
+
+
+
+

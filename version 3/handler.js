@@ -3,8 +3,8 @@
 
 const handler = function (obj) {
     /** handle the username and his score sent by the client */
-    console.log(obj);
-    return obj;
+
+    return Promise.resolve(obj);
 };
 
 export default Object.freeze(handler);
